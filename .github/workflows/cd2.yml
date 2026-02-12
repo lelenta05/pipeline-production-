@@ -1,0 +1,21 @@
+name: CD avec Runner
+
+on:
+  push:
+    branches:[ "main" ]
+jobs:
+  test-runner:
+    runs-on:
+      - self-hosted
+      - linux
+      - x64
+    steps:
+      - name: CD 2 avec runner pour la verificaton du deploiement
+        run: echo "TestD de fonctionnement du Runner !"
+      - name: Recuperation du code
+        uses: actions/checkout@v3
+      - name: Deploiement vers GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
